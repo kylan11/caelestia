@@ -295,6 +295,9 @@ if set -q _flag_zen
     log 'Please install the CaelestiaFox extension from https://addons.mozilla.org/en-US/firefox/addon/caelestiafox if you have not already done so.'
 end
 
+mkdir -p $HOME/Pictures/Wallpapers
+git clone https://github.com/mylinuxforwork/wallpaper $HOME/Pictures/Wallpapers
+
 # Generate scheme stuff if needed
 if ! test -f $state/caelestia/scheme.json
     caelestia scheme set -n shadotheme

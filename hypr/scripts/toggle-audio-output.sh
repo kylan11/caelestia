@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-HEADSET_SINK="bluez_output.14_22_3B_D2_F7_95.1"
-#HEADSET_SINK="alsa_output.usb-Logitech_G_series_G435_Wireless_Gaming_Headset_202105190004-00.analog-stereo"
+HEADSET_SINK="alsa_output.usb-Logitech_G_series_G435_Wireless_Gaming_Headset_202105190004-00.analog-stereo"
 ANALOG_SINK="alsa_output.pci-0000_69_00.6.analog-stereo"
 
 # Get the current default sink

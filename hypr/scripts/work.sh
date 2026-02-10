@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-nohup teams-for-linux >/dev/null 2>&1 &
+hyprctl dispatch exec '[workspace special:teams silent] teams-for-linux'
 
-nohup /opt/outlook-for-linux/outlook-for-linux >/dev/null 2>&1 &
+hyprctl dispatch exec '[workspace special:email silent] thunderbird'
 
 hyprctl dispatch workspace 2
 sleep 0.1

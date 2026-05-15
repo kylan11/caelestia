@@ -32,6 +32,9 @@ if status is-interactive
     abbr ll 'ls -l'
     abbr la 'ls -a'
     abbr lla 'ls -la'
+    abbr oc 'opencode'
+
+    export HIP_VISIBLE_DEVICES=0
 
     # Custom colours
     cat ~/.local/state/caelestia/sequences.txt 2> /dev/null
@@ -40,6 +43,8 @@ if status is-interactive
     function mark_prompt_start --on-event fish_prompt
         echo -en "\e]133;A\e\\"
     end
+
+    set -gx XDG_DATA_DIRS $XDG_DATA_DIRS /var/lib/flatpak/exports/share $HOME/.local/share/flatpak/exports/share
 
     set -gx OBSIDIAN_USE_WAYLAND 1
 

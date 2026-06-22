@@ -38,8 +38,8 @@ function occtx -d "Switch OhMyOpenCode context (cheap|expensive)"
     # Show primary models for this context
     switch $target
         case cheap
-            echo "Primary: opencode-go/kimi-k2.5, opencode-go/glm-5"
+            echo "Primary: opencode-go/kimi-k2.6, opencode-go/glm-5.1, opencode-go/qwen3.5-plus"
         case expensive
-            echo "Primary: github-copilot/claude-opus-4.6, github-copilot/gpt-5.4"
+            echo "Primary: github-copilot/claude-opus-4.8, github-copilot/gpt-5.5, github-copilot/gpt-5.4-mini"
     end
 end

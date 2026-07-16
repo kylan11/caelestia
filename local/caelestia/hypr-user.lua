@@ -112,15 +112,8 @@ hl.bind(vars.kbFileExplorer, hl.dsp.exec_cmd("app2unit -- " .. vars.fileExplorer
 unbind("CTRL + ALT + V")
 hl.bind("CTRL + ALT + V", hl.dsp.exec_cmd("app2unit -- " .. vars.audioSettings))
 
--- Volume: fix @DEFAULT_AUDIO_SOURCE@ -> @DEFAULT_AUDIO_SINK@ and add -l 1 limit
-unbind("XF86AudioRaiseVolume")
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(
-    "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ " .. vars.volumeStep .. "%+"),
-    { locked = true, repeating = true })
-unbind("XF86AudioLowerVolume")
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(
-    "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume @DEFAULT_AUDIO_SINK@ " .. vars.volumeStep .. "%-"),
-    { locked = true, repeating = true })
+-- (Volume @DEFAULT_AUDIO_SINK@ fix retired: upstream adopted it in 9ffafc2 and
+-- improved it with a volumeMax variable, so we let upstream's binds stand.)
 
 --------------------
 ---- Startup execs -

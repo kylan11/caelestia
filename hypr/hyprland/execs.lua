@@ -27,8 +27,6 @@ hl.on("hyprland.start", function()
 
     -- Start shell
     hl.exec_cmd("caelestia shell -d")
-
-    hl.exec_cmd("open-webui serve")
 end)
 
 -- Resizer listener

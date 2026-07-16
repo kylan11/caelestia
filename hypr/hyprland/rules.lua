@@ -104,8 +104,6 @@ hl.window_rule({
 hl.window_rule({ match = { initial_title = "Spotify( %(?Free%)?)?" } }) -- Spotify wayland, it has no class for some reason
 hl.window_rule({ match = { class = "discord|equibop|vesktop|whatsapp" }, workspace = "special:communication" })
 hl.window_rule({ match = { class = "Todoist" }, workspace = "special:todo" })
-hl.window_rule({ match = { class = "thunderbird" }, workspace = "special:email" })
-hl.window_rule({ match = { class = "teams-for-linux" }, workspace = "special:teams" })
 
 -------------------------
 ---- Workspace rules ----
@@ -113,12 +111,6 @@ hl.window_rule({ match = { class = "teams-for-linux" }, workspace = "special:tea
 
 hl.workspace_rule({ workspace = "w[tv1]s[false]", gaps_out = vars.singleWindowGapsOut })
 hl.workspace_rule({ workspace = "f[1]s[false]", gaps_out = vars.singleWindowGapsOut })
-hl.workspace_rule({ workspace = "special:sysmon", monitor = "DP-3" })
-hl.workspace_rule({ workspace = "special:music", monitor = "DP-3" })
-hl.workspace_rule({ workspace = "special:communication", monitor = "DP-3" })
-hl.workspace_rule({ workspace = "special:todo", monitor = "DP-3" })
-hl.workspace_rule({ workspace = "special:email", monitor = "DP-3" })
-hl.workspace_rule({ workspace = "special:teams", monitor = "DP-3" })
 
 ---------------------
 ---- Layer rules ----

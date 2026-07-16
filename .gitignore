@@ -11,3 +11,7 @@
 /fish/conf.d/
 
 .SRCINFO
+
+# Built AUR packages / local build artifacts
+*.pkg.tar*
+/patches/

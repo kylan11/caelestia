@@ -7,15 +7,14 @@ return {
 
     -- Apps
     terminal                   = "foot",
-    browser                    = "brave",
-    editor                     = "foot nvim",
-    fileExplorer               = "foot ranger",
-    fileExplorerVisual         = "thunar",
+    browser                    = "firefox",
+    editor                     = "codium",
+    fileExplorer               = "thunar",
     audioSettings              = "pavucontrol",
 
     -- Touchpad
     touchpadDisableTyping      = true,
-    touchpadScrollFactor       = 0.3,
+    touchScrollFactor          = 0.3,
     gestureFingers             = 3,
     workspaceSwipeFingers      = 4,
     gestureFingersMore         = 4,
@@ -31,9 +30,9 @@ return {
 
     -- Shadow
     shadowEnabled              = true,
-    shadowRange                = 20,
-    shadowRenderPower          = 3,
-    shadowColour               = "rgba(" .. scheme.surfaceContainerHighest .. "10)",
+    shadowRange                = 15,
+    shadowRenderPower          = 4,
+    shadowColour               = "rgba(" .. scheme.inversePrimary .. "10)",
 
     -- Gaps
     workspaceGaps              = 20,
@@ -44,13 +43,13 @@ return {
     -- Window styling
     windowOpacity              = 0.95,
     windowRounding             = 15,
-    windowBorderSize           = 0,
+    windowBorderSize           = 1,
     activeWindowBorderColour   = "rgba(" .. scheme.primary .. "e6)",
     inactiveWindowBorderColour = "rgba(" .. scheme.onSurfaceVariant .. "11)",
 
     -- Misc
-    volumeStep                 = 5,
-    cursorTheme                = "Sweet-cursors-hyprcursor",
+    volumeStep                 = 10,
+    cursorTheme                = "sweet-cursors",
     cursorSize                 = 24,
     sleepGestureCmd            = "systemctl suspend-then-hibernate",
 
@@ -59,7 +58,7 @@ return {
     ------------------
 
     -- Workspaces
-    kbMoveWinToWs              = "SUPER + SHIFT",
+    kbMoveWinToWs              = "SUPER + ALT",
     kbMoveWinToWsGroup         = "CTRL + SUPER + ALT",
     kbGoToWs                   = "SUPER",
     kbGoToWsGroup              = "CTRL + SUPER",
@@ -76,37 +75,30 @@ return {
     kbMoveWindow               = "SUPER + Z",
     kbResizeWindow             = "SUPER + X",
     kbWindowPip                = "SUPER + ALT + backslash",
-    kbPinWindow                = "SUPER + ALT + P",
+    kbPinWindow                = "SUPER + P",
     kbWindowFullscreen         = "SUPER + F",
     kbWindowBorderedFullscreen = "SUPER + ALT + F",
-    kbToggleWindowFloating     = "SUPER + SHIFT + F",
+    kbToggleWindowFloating     = "SUPER + ALT + space",
     kbCloseWindow              = "SUPER + Q",
 
     -- Special workspaces toggles
-    kbSpecialWs                = "SUPER + SHIFT + S",
+    kbSpecialWs                = "SUPER + S",
     kbSystemMonitorWs          = "CTRL + SHIFT + Escape",
     kbMusicWs                  = "SUPER + M",
     kbCommunicationWs          = "SUPER + D",
-    kbTodoWs                   = "SUPER + T",
-    kbMailWs                   = "SUPER + O",
-    kbTeamsWs                  = "SUPER + P",
-    kbChatWs                   = "SUPER + Y",
+    kbTodoWs                   = "SUPER + R",
 
     -- Apps
-    kbTerminal                 = "SUPER + RETURN",
+    kbTerminal                 = "SUPER + T",
     kbBrowser                  = "SUPER + W",
-    kbBrowserWork              = "SUPER + E",
-    kbBrowserWork2             = "SUPER + SHIFT + E",
     kbEditor                   = "SUPER + C",
-    kbFileExplorer             = "SUPER + R",
-    kbFileExplorerVisual       = "SUPER + SHIFT + R",
-    kbCalculator               = "SUPER + End",
+    kbFileExplorer             = "SUPER + E",
 
     -- Misc
-    kbSession                  = "SUPER + X",
+    kbSession                  = "CTRL + ALT + Delete",
     kbShowSidebar              = "SUPER + N",
     kbClearNotifs              = "CTRL + ALT + C",
-    kbShowPanels               = "SUPER + ALT + K",
+    kbShowPanels               = "SUPER + K",
     kbLock                     = "SUPER + L",
-    kbRestoreLock              = "SUPER + ALT + X",
+    kbRestoreLock              = "SUPER + ALT + L",
 }

@@ -19,16 +19,45 @@ The installer backs up existing configs, installs the `caelestia-meta` AUR packa
 
 ## Architecture
 
-### Hyprland Config Hierarchy
+### Hyprland Config Hierarchy (Lua)
 
-The Hyprland configuration uses a modular source-chain pattern:
+Hyprland 1.11+ runs the config as native **Lua** (the `hl.*` API; stubs at
+`/usr/share/hypr/stubs/hl.meta.lua`). The chain:
 
-1. **`hypr/hyprland.conf`** — Entry point. Sets path variables (`$hypr`, `$hl`, `$cConf`), monitor config, and sources everything below.
-2. **`hypr/scheme/current.conf`** — Color scheme (auto-copied from `default.conf` on first launch). Defines color variables like `$primary`, `$surface`, `$onSurfaceVariant`.
-3. **`hypr/variables.conf`** — Reusable variables for apps, keybinds, styling (gaps, blur, opacity, borders). All keybind keys are defined here as `$kb*` variables.
-4. **`hypr/hyprland/*.conf`** — Functional modules: `keybinds.conf`, `rules.conf`, `animations.conf`, `decoration.conf`, `env.conf`, `execs.conf`, `general.conf`, `input.conf`, `misc.conf`, `gestures.conf`, `group.conf`.
+1. **`hypr/hyprland.lua`** — Entry point. Adds `~/.config/caelestia/?.lua` to
+   `package.path`, merges user variable overrides, sets monitors, then
+   `require()`s each module.
+2. **`hypr/scheme/current.lua`** — Color scheme (auto-copied from `default.lua`
+   on first launch). A table of colours (`primary`, `surface`, …).
+3. **`hypr/variables.lua`** — Returns a table of apps, styling, and all keybind
+   keys as `kb*` fields.
+4. **`hypr/hyprland/*.lua`** — Modules: `keybinds`, `rules`, `animations`,
+   `decoration`, `env`, `execs`, `general`, `input`, `misc`, `gestures`,
+   `group`, `functions`.
 
-User overrides (not in repo) are loaded from `~/.config/caelestia/hypr-vars.conf` and `~/.config/caelestia/hypr-user.conf`.
+### Personal customization (override-first — do NOT edit tracked files)
+
+To stay merge-conflict-free on upstream updates, personal changes live **only**
+in override files that upstream never touches — never in `hypr/**` or
+`fish/config.fish` directly:
+
+- **`~/.config/caelestia/hypr-vars.lua`** — returns a table merged into
+  `variables.lua` *before* modules load. For value/keybind-**key** overrides.
+  Must never throw (it's required unprotected).
+- **`~/.config/caelestia/hypr-user.lua`** — arbitrary Lua run *after* all
+  modules. For new/replaced binds (`hl.bind`; `hl.unbind` first to replace an
+  upstream bind and avoid double-fire), `hl.window_rule`, `hl.monitor`,
+  `hl.config`, and `hl.on("hyprland.start", …)` execs.
+- **`~/.config/caelestia/user-config.fish`** — sourced by `fish/config.fish`.
+  For fish aliases/functions/env. Secrets go in `secrets.fish` (unversioned,
+  sourced by it) — never commit secrets to this PUBLIC repo.
+
+These override files are versioned per machine branch under **`local/caelestia/`**
+and symlinked into `~/.config/caelestia/` by **`local/bootstrap.fish`** (re-run
+after every `git pull`). Machine-specific values (monitors, `kb_layout`, audio
+IDs, VPN path) differ per branch; the `local/` structure is identical.
+`user-config.fish`, `secrets.fish`, and personal `scripts/` are local-only
+(contain secrets/PII) and are NOT in this public repo.
 
 ### External Dependencies
 
@@ -38,7 +67,7 @@ Two companion projects provide runtime functionality (not in this repo):
 
 ### Config Formats
 
-- `.conf` — Hyprland configs (custom key-value with `source` includes and `$variable` references)
+- `.lua` — Hyprland configs (native Lua via the `hl.*` API)
 - `.fish` — Fish shell scripts
 - `.toml` — Starship prompt (`starship.toml`)
 - `.ini` — Foot terminal (`foot/foot.ini`), Spicetify

@@ -1,4 +1,3 @@
-
 if status is-interactive
     # Starship custom prompt
     command -v starship &> /dev/null && starship init fish | source
@@ -32,9 +31,6 @@ if status is-interactive
     abbr ll 'ls -l'
     abbr la 'ls -a'
     abbr lla 'ls -la'
-    abbr oc 'opencode'
-
-    export HIP_VISIBLE_DEVICES=0
 
     # Custom colours
     cat ~/.local/state/caelestia/sequences.txt 2> /dev/null
@@ -44,12 +40,7 @@ if status is-interactive
         echo -en "\e]133;A\e\\"
     end
 
-    set -gx XDG_DATA_DIRS $XDG_DATA_DIRS /var/lib/flatpak/exports/share $HOME/.local/share/flatpak/exports/share
-
-    set -gx OBSIDIAN_USE_WAYLAND 1
-
     # Custom fish config
     set -q XDG_CONFIG_HOME && set -l cConf $XDG_CONFIG_HOME/caelestia || set -l cConf $HOME/.config/caelestia
     source $cConf/user-config.fish 2> /dev/null
 end
-

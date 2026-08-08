@@ -31,8 +31,15 @@ hl.monitor({ output = "eDP-1", mode = "preferred", position = "0x0", scale = 1.3
 --------------------
 ---- Input ---------
 --------------------
--- Re-declared after input.lua; Hyprland keywords are last-wins.
-hl.config({ input = { kb_layout = "it" } })
+-- Re-declared after input.lua; Hyprland keywords are last-wins, and setting
+-- input:natural_scroll does not disturb input:touchpad:natural_scroll.
+hl.config({ input = {
+    kb_layout      = "it",
+    -- Mice/external pointers. The touchpad is already natural via upstream's
+    -- input.lua (input:touchpad:natural_scroll = true), so this is the half
+    -- that was still inverted.
+    natural_scroll = true,
+} })
 
 --------------------
 ---- New keybinds --

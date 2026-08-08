@@ -1,4 +1,4 @@
--- Personal Hyprland variable overrides.
+-- Personal Hyprland variable overrides — ThinkPad T14s (Arch Linux).
 --
 -- Symlinked to ~/.config/caelestia/hypr-vars.lua by local/bootstrap.fish and
 -- loaded by hypr/hyprland.lua BEFORE the config modules, so these values are
@@ -7,6 +7,10 @@
 --
 -- This file must never throw: hyprland.lua requires it unprotected, so an error
 -- here aborts the whole config load. Keep it a plain table + guarded extras.
+--
+-- Differences from kylan11-arch-desktop: no work-app keys (mail/teams/chat), no
+-- work browser profiles, no calculator (rofi-calc isn't installed), and a
+-- cursor theme that actually exists on this machine.
 
 local overrides = {
     -- Apps
@@ -14,10 +18,6 @@ local overrides = {
     editor             = "foot nvim",
     fileExplorer       = "foot ranger",
     fileExplorerVisual = "thunar",
-
-    -- Touchpad (upstream names this touchScrollFactor but input.lua reads
-    -- touchpadScrollFactor, so we must set the name input.lua actually uses)
-    touchpadScrollFactor = 0.3,
 
     -- Shadow
     shadowRange       = 20,
@@ -28,7 +28,11 @@ local overrides = {
 
     -- Misc
     volumeStep  = 5,
-    cursorTheme = "Sweet-cursors-hyprcursor",
+    -- Adwaita is the only theme under /usr/share/icons with real cursors here.
+    -- The desktop's Sweet-cursors-hyprcursor is not installed on this laptop
+    -- (nor is upstream's default sweet-cursors), and a missing theme leaves
+    -- XCURSOR_THEME/HYPRCURSOR_THEME pointing at nothing.
+    cursorTheme = "Adwaita",
 
     ------------------
     ---- KEYBINDS ----
@@ -47,18 +51,13 @@ local overrides = {
     kbToggleWindowFloating = "SUPER + SHIFT + F",
 
     -- Special workspaces
-    kbTodoWs  = "SUPER + T",
-    kbMailWs  = "SUPER + O",
-    kbTeamsWs = "SUPER + P",
-    kbChatWs  = "SUPER + Y",
+    -- Must be remapped off its upstream SUPER+R, which kbFileExplorer takes.
+    kbTodoWs = "SUPER + T",
 
     -- Apps
     kbTerminal           = "SUPER + RETURN",
-    kbBrowserWork        = "SUPER + E",
-    kbBrowserWork2       = "SUPER + SHIFT + E",
     kbFileExplorer       = "SUPER + R",
     kbFileExplorerVisual = "SUPER + SHIFT + R",
-    kbCalculator         = "SUPER + End",
 
     -- Misc
     kbSession     = "SUPER + X",

@@ -56,6 +56,7 @@ local overrides = {
     kbTerminal           = "SUPER + RETURN",
     kbBrowserWork        = "SUPER + E",
     kbBrowserWork2       = "SUPER + SHIFT + E",
+    kbBrowserWork3       = "SUPER + SHIFT + W",
     kbFileExplorer       = "SUPER + R",
     kbFileExplorerVisual = "SUPER + SHIFT + R",
     kbCalculator         = "SUPER + End",

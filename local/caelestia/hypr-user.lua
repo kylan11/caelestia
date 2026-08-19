@@ -22,8 +22,8 @@ end
 --------------------
 -- Named-output rules take precedence over upstream's catch-all monitor, so we
 -- just add ours; other outputs still fall back to preferred/auto.
-hl.monitor({ output = "DP-1", mode = "3440x1440@180", position = "0x0", scale = 1 })
-hl.monitor({ output = "DP-3", mode = "1920x1080@144", position = "760x-1080", scale = 1 })
+hl.monitor({ output = "DP-3", mode = "3440x1440@180", position = "0x0", scale = 1 })
+hl.monitor({ output = "DP-1", mode = "1920x1080@144", position = "760x-1080", scale = 1 })
 
 --------------------
 ---- Input / misc --
@@ -39,12 +39,12 @@ hl.window_rule({ match = { class = "thunderbird" }, workspace = "special:email" 
 hl.window_rule({ match = { class = "teams-for-linux" }, workspace = "special:teams" })
 
 -- Pin special workspaces to the secondary monitor.
-hl.workspace_rule({ workspace = "special:sysmon", monitor = "DP-3" })
-hl.workspace_rule({ workspace = "special:music", monitor = "DP-3" })
-hl.workspace_rule({ workspace = "special:communication", monitor = "DP-3" })
-hl.workspace_rule({ workspace = "special:todo", monitor = "DP-3" })
-hl.workspace_rule({ workspace = "special:email", monitor = "DP-3" })
-hl.workspace_rule({ workspace = "special:teams", monitor = "DP-3" })
+hl.workspace_rule({ workspace = "special:sysmon", monitor = "DP-1" })
+hl.workspace_rule({ workspace = "special:music", monitor = "DP-1" })
+hl.workspace_rule({ workspace = "special:communication", monitor = "DP-1" })
+hl.workspace_rule({ workspace = "special:todo", monitor = "DP-1" })
+hl.workspace_rule({ workspace = "special:email", monitor = "DP-1" })
+hl.workspace_rule({ workspace = "special:teams", monitor = "DP-1" })
 
 --------------------
 ---- New keybinds --
@@ -56,7 +56,6 @@ hl.bind("CTRL + ALT + Escape", hl.dsp.exec_cmd("app2unit -- qps"))
 hl.bind("SUPER + ALT + E", hl.dsp.exec_cmd("app2unit -- nemo"))
 hl.bind("SUPER + SHIFT + K", hl.dsp.exec_cmd("EDITOR=nvim VISUAL=nvim foot k9s"))
 hl.bind("SUPER + F12", hl.dsp.exec_cmd("~/.config/caelestia/scripts/toggle-audio-output.sh"))
-hl.bind("SUPER + SHIFT + W", hl.dsp.exec_cmd("~/.config/caelestia/scripts/work.sh"))
 
 hl.bind(vars.kbMailWs, hl.dsp.exec_cmd("caelestia toggle email"))
 hl.bind(vars.kbTeamsWs, hl.dsp.exec_cmd("caelestia toggle teams"))
@@ -66,6 +65,9 @@ hl.bind(vars.kbBrowserWork,
     hl.dsp.exec_cmd("app2unit -- " .. vars.browser .. " --password-store=basic --profile-directory=\"Profile 1\""))
 hl.bind(vars.kbBrowserWork2,
     hl.dsp.exec_cmd("app2unit -- " .. vars.browser .. " --password-store=basic --profile-directory=\"Profile 2\""))
+-- Profile 3 = "Conio"
+hl.bind(vars.kbBrowserWork3,
+    hl.dsp.exec_cmd("app2unit -- " .. vars.browser .. " --password-store=basic --profile-directory=\"Profile 3\""))
 hl.bind(vars.kbFileExplorerVisual, hl.dsp.exec_cmd("app2unit -- " .. vars.fileExplorerVisual))
 hl.bind(vars.kbCalculator, hl.dsp.exec_cmd("rofi -show calc -modi calc -no-show-match -no-sort"))
 
@@ -125,6 +127,11 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpm reload -n")
     -- AI usage dashboard fetcher (feeds the AI Usage tab in the dashboard)
     hl.exec_cmd("python3 ~/.config/quickshell/usage-dashboard/fetch_usage.py")
-    -- Local LLM web UI
-    hl.exec_cmd("open-webui serve")
+    -- Unsloth Studio (replaces the ollama + open-webui + searxng stack).
+    -- HIP pin: without it studio's GPU auto-pick can select the iGPU (bigger
+    -- GTT pool), which the bundled llama.cpp has no gfx1036 kernels for.
+    -- FIT_TARGET: leave 3 GiB VRAM for the desktop (compositor + browser render
+    -- on the same card) — a full card causes TTM eviction stalls (whole-system
+    -- freezes with frozen cursor whenever the desktop allocates GPU memory).
+    hl.exec_cmd("env HIP_VISIBLE_DEVICES=0 LLAMA_ARG_FIT_TARGET=3072 ~/.unsloth/studio/unsloth_studio/bin/unsloth studio -p 8888")
 end)

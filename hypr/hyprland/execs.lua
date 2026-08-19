@@ -25,8 +25,14 @@ hl.on("hyprland.start", function()
     -- Forward bluetooth media commands to MPRIS
     hl.exec_cmd("mpris-proxy")
 
+    -- Cooler LCD (Thermalright Grand Vision) — tray-hidden, restores last theme
+    hl.exec_cmd("trcc gui --resume")
+
     -- Start shell
     hl.exec_cmd("caelestia shell -d")
+
+    -- OpenVPN 3 tray indicator (needs the shell's tray, so start it after)
+    hl.exec_cmd("sleep 2 && openvpn3-indicator")
 end)
 
 -- Resizer listener

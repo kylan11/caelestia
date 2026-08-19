@@ -1,4 +1,5 @@
 /hypr/scheme/current.conf
+/hypr/scheme/current.lua
 
 /spicetify/config-xpui.ini
 /spicetify/Themes/caelestia/color.ini
@@ -7,5 +8,10 @@
 /btop/themes/
 
 /fish/fish_variables
+/fish/conf.d/
 
 .SRCINFO
+
+# Built AUR packages / local build artifacts
+*.pkg.tar*
+/patches/

@@ -123,6 +123,7 @@ hl.bind("CTRL + ALT + V", hl.dsp.exec_cmd("app2unit -- " .. vars.audioSettings))
 -- Additive to execs.lua's own hyprland.start subscription. Only runs at login
 -- (not on `hyprctl reload`), so relocating these is safe.
 hl.on("hyprland.start", function()
+    hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY DISPLAY && systemctl --user start opentabletdriver.service")
     -- Load hyprpm plugins (split-monitor-workspaces, etc.)
     hl.exec_cmd("hyprpm reload -n")
     -- AI usage dashboard fetcher (feeds the AI Usage tab in the dashboard)
